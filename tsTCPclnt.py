@@ -5,7 +5,7 @@ from socket import *
 
 HOST = 'localhost'
 PORT = 21567
-BUGSIZ = 1024
+BUFSIZ = 1024
 ADDR = (HOST, PORT)
 
 
@@ -18,7 +18,7 @@ def main():
 		if not data:
 			break
 		tcpCliSock.send(data)
-		data = tcpCliSock.recv(BUGSIZ)
+		data = tcpCliSock.recv(BUFSIZ)
 		if not data:
 			break
 		print data

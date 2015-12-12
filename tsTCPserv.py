@@ -6,7 +6,7 @@ from time import ctime
 
 HOST = ''
 PORT = 21567
-BUGSIZ = 1024
+BUFSIZ = 1024
 ADDR = (HOST, PORT)
 
 
@@ -21,7 +21,7 @@ def main():
 		print '...connected from:', addr
 
 		while True:
-			data = tcpCliSock.recv(BUGSIZ)
+			data = tcpCliSock.recv(BUFSIZ)
 			if not data:
 				break
 			print 'receved: ', data
