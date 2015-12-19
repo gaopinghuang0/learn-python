@@ -27,3 +27,4 @@ for funcType in ('handler', 'request'):
 	f = urllib2.urlopen(url)
 	print f.readline()
 	f.close()
+
