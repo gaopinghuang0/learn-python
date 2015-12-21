@@ -2,6 +2,6 @@
 Some interesting stuff about python.
 
 ### Source
-Core python 2ed
+Core python (2nd edition)
 
 [simple interpreter](https://github.com/aosabook/500lines/blob/master/interpreter/interpreter.markdown)
