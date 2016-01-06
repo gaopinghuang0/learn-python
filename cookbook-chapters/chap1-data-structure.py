@@ -17,11 +17,42 @@ def test_dedupe_with_order():
 	print list(dedupe_with_order(a, key=lambda d: d['x']))
 
 
+def test_itemgetter():
+	from operator import itemgetter
+	rows = [
+        {'fname': 'Brian', 'lname': 'Jones', 'uid': 1003},
+        {'fname': 'David', 'lname': 'Beazley', 'uid': 1002},
+        {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
+        {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}
+	]
+	row_by_fname = sorted(rows, key=itemgetter('fname'))
+	row_by_uid = sorted(rows, key=itemgetter('uid'))
+	print row_by_fname
+	print row_by_uid
+	# accept multiple keys
+	row_by_lfname = sorted(rows, key=itemgetter('lname', 'fname'))
+	print row_by_lfname
+	print min(rows, key=itemgetter('uid'))
+	print min(rows, key=lambda r: r['uid'])
 
+def test_attrgetter():
+	from operator import attrgetter
 
+	class User(Object):
+		def __init__(self, user_id):
+			self.user_id = user_id
+
+		def __repr__(self):
+			return 'User({})'.format(self.user_id)
+
+	users = [User(23), User(3), User(90)]
+	print users
+	print sorted(users, key=attrgetter('user_id'))
+	print sorted(users, key=lambda u: u.user_id)
 
 def main():
-	test_dedupe_with_order()
+	# test_dedupe_with_order()
+	test_itemgetter()
 
 
 
