@@ -50,9 +50,21 @@ def test_attrgetter():
 	print sorted(users, key=attrgetter('user_id'))
 	print sorted(users, key=lambda u: u.user_id)
 
+# Abandon: no ChainMap in Python2.7
+# But it's particularly useful when working with scoped values
+# such as variables in a programming language (i.e., globals, locals, etc.)
+def test_ChainMap():
+	from collections import ChainMap
+	a = {'x': 1, 'z': 3}
+	b = {'y': 2, 'z': 4}
+	c = ChainMap(a, b)
+	print (c['x'], c['y'], c['z'])
+
+
 def main():
 	# test_dedupe_with_order()
-	test_itemgetter()
+	# test_itemgetter()
+	test_ChainMap()
 
 
 
