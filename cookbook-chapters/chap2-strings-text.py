@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, unicode_literals # boilerplate
 from os import listdir
+from collections import namedtuple
 import re
 
 def test_endswith():
@@ -64,8 +65,127 @@ def test_shortest_match():
 	str_pat2 = re.compile(r'\"(.*?)\"')
 	print str_pat2.findall(text)
 
+
+def test_multiline_match():
+	comment = re.compile(r'/\*((?:.|\n)*?)\*/')
+	text2 = '''/* this is a 
+			 multiline comment */
+			 '''
+	print comment.findall(text2)
+	# or
+	comment2 = re.compile(r'/\*(.*?)\*/', re.DOTALL)
+	print comment2.findall(text2)
+
+def test_strip():
+	s = '     hello world   \n'
+	print s.strip()
+	print s.lstrip()
+	print s.rstrip()
+
+	s = '----hello======'
+	print s.lstrip('-')
+	print s.strip('-=')
+
+
+def test_translate():
+	s = 'pýtĥöñ\fis\tawesome\r\n'
+	print s
+	remap = {
+		ord('\t'): ' ',
+		ord('\f'): ' ',
+		ord('\r'): None
+	}
+	a = s.translate(remap)
+	print a
+
+	# remove all combining characters
+	import unicodedata
+	import sys
+	cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode)
+		if unicodedata.combining(chr(c)))
+	b = unicodedata.normalize('NFD', a)
+	print b
+	print b.translate(cmb_chrs)
+
+	# maps all Unicode decimal digit to ASCII
+	digitmap = {c: ord('0')+unicodedata.digit(chr(c))
+	for c in range(sys.maxunicode)
+	if unicodedata.category(chr(c)) == 'Nd'}
+	print len(digitmap)
+	# Arabic digits
+	x = '\u0661\u0662\u0663'
+	print x.translate(digitmap)
+
+
+def test_align_text():
+	text = 'hello world'
+	print text.ljust(20)
+	print text.rjust(20)
+	print text.center(20)
+
+	# with fill character
+	print text.center(20, '*')
+	print format(text, '>20')
+	print format(text, '^20')
+	print format(text, '=^20s')
+	print '{:>10s} {:>10s}'.format('hello', 'world')
+	x = 1.2345
+	print format(x, '>20')
+
+
+def test_concatenation():
+
+	def combine(source, maxsize):
+		parts = []
+		size = 0
+		for part in source:
+			parts.append(part)
+			size += len(part)
+			if size > maxsize:
+				yield ''.join(parts)
+				parts = []
+				size = 0
+		yield ''.join(parts)
+
+
+def test_interpolating_variables_in_string():
+	s = '{name} has {n} messages.'
+	print s.format(name='Gao', n=20)
+
+	# safesub when missing var
+	class safesub(dict):
+		def __missing__(self, key):
+			return '{' + key + '}'
+	import sys
+	# Abandon: no format_map in 2.x
+	def sub(text):
+		return text.format_map(safesub(sys._getframe(1).f_locals))
+	name = 'Gao'
+	n = 20
+	print sub('hello {name}')
+
+
+def test_tokenize():
+	Token = namedtuple('Token', ['type', 'value'])
+	def generate_tokens(pat, text):
+		scanner = pat.scanner(text)
+		for m in iter(scanner.match, None):
+			yield Token(m.lastgroup, m.group())
+
+	NAME = r'(?P<NAME>[a-zA-Z_][a-zA-Z_0-9]*)'
+	NUM = r'(?P<NUM>\d+)'
+	PLUS = r'(?P<PLUS>\+)'
+	TIMES = r'(?P<TIMES>\*)'
+	EQ = r'(?P<EQ>=)'
+	WS = r'(?P<WS>\s+)'
+
+	master_pat = re.compile('|'.join([NAME, NUM, PLUS, TIMES, EQ, WS]))
+
+	for tok in generate_tokens(master_pat, 'foo = 42'):
+		print tok
+
 def main():
-	test_shortest_match()
+	test_tokenize()
 
 
 
