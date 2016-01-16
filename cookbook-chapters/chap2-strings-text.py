@@ -184,6 +184,8 @@ def test_tokenize():
 	for tok in generate_tokens(master_pat, 'foo = 42'):
 		print tok
 
+
+
 def main():
 	test_tokenize()
 
