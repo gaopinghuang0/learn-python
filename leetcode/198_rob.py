@@ -1,3 +1,6 @@
+import unittest
+
+
 class Solution(object):
 	def rob(self, nums):
 		"""
@@ -19,4 +22,25 @@ class Solution(object):
 				dp.append(dp[-1])
 		return dp[-1]
 
-print Solution().rob([2, 1, 1, 3, 4, 4, 9])
+	def rob_not_DP(self, nums):
+		"""Use interative way."""
+		include, exclude = 0, 0
+		for num in nums:
+			include, exclude = (exclude+num, max(include, exclude))
+		return max(include, exclude)
+
+
+
+class TestMethods(unittest.TestCase):
+	def setUp(self):
+		self.s = Solution()
+
+	def test_method(self):
+		data = [2, 1, 1, 3, 4, 4, 9]
+		self.assertEqual(self.s.rob(data), self.s.rob_not_DP(data))
+		data = [2, 1, 1, 2]
+		self.assertEqual(self.s.rob(data), self.s.rob_not_DP(data))
+
+
+if __name__ == "__main__":
+	unittest.main()
