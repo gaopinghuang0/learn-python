@@ -34,6 +34,9 @@ class TestSolution(unittest.TestCase):
 		data = []
 		self.assertEqual(self.s.rob(data), 0)
 
+		data = [1]
+		self.assertEqual(self.s.rob(data), 1)
+
 		data = [2, 1, 1, 2, 3, 4, 5, 6, 7, 1, 9, 6]
 		self.assertEqual(self.s.rob(data), 27)
 
