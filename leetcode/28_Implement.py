@@ -17,7 +17,7 @@ class Solution(object):
         if nsize > hsize:
         	return -1
 
-        for i in xrange(hsize - nsize+1):
+        for i in xrange(hsize-nsize+1):
         	if haystack[i:i+nsize] == needle:
         		return i
        	return -1
