@@ -26,7 +26,7 @@ def array_to_list(arr):
 
 def linked_list_to_array(node):
     if not node:
-        return None
+        return []
 
     res = []
     while node:
