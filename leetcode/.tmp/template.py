@@ -2,17 +2,17 @@ import unittest
 
 
 class Solution(object):
-    pass
+  pass
 
 
 class TestSolution(unittest.TestCase):
-    def setUp(self):
-        self.s = Solution()
+  def setUp(self):
+    self.s = Solution()
 
-    def test_method(self):
-        """Such as self.assertEqual, self.assertTrue"""
-        pass
+  def test_method(self):
+    """Such as self.assertEqual, self.assertTrue"""
+    pass
 
 
 if __name__ == "__main__":
-    unittest.main()
+  unittest.main()
