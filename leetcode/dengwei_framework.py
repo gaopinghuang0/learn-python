@@ -18,8 +18,6 @@ class LeetCode:
             l = l.strip().split("\t")
             par = l[0].split(" ")
             id = par[0]
-            if len(id) < 2:
-                id = "0" + id
             title = ""
             tag = 0
             for pars in range(1, len(par)):
@@ -28,7 +26,7 @@ class LeetCode:
                     tag = 1
                 if tag == 1 and par[pars] == "":
                     break
-            num_list[id] = id + title
+            num_list[id] = id.zfill(4) + title   # add padding 0s
         return num_list[num]
 
 # check if file exists, do nothing if it does, avoid overwrite
