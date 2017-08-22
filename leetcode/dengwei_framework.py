@@ -13,7 +13,7 @@ class LeetCode:
         self.f = f
     def title(self, num):
         fileList = open(self.f)
-        num_list = {}
+        ques_num_dict = {}
         for l in fileList:
             l = l.strip().split("\t")
             par = l[0].split(" ")
@@ -26,8 +26,8 @@ class LeetCode:
                     tag = 1
                 if tag == 1 and par[pars] == "":
                     break
-            num_list[id] = id.zfill(4) + title   # add padding 0s
-        return num_list[num]
+            ques_num_dict[id] = id.zfill(4) + title   # add padding 0s
+        return ques_num_dict[num]
 
 # check if file exists, do nothing if it does, avoid overwrite
 class Framework:
