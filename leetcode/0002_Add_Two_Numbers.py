@@ -23,7 +23,7 @@ class Solution(object):
                 l2 = l2.next
             val = v1 + v2 + carry
             if val >= 10:
-                val = (v1 + v2 + carry) - 10
+                val -= 10
                 carry = 1
             else:
                 carry = 0

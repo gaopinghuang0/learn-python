@@ -39,13 +39,13 @@ def print_linked_list(node):
         return False
 
     while True:
-        print node.val,
+        print(node.val,)
         node = node.next
         if node:
-            print '->',
+            print('->',)
         else:
             break
-    print '\n'
+    print('\n')
 
 
 def main():
