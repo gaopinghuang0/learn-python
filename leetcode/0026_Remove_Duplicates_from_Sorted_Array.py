@@ -15,9 +15,7 @@ class Solution(object):
     n = len(nums)
     last = nums[i]
     while j < n:
-      while j < n and last >= nums[j]:
-        j += 1
-      if i+1 < n and j < n:
+      if last < nums[j]:
         i += 1
         nums[i] = nums[j]
         last = nums[i]
