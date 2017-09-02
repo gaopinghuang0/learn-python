@@ -14,14 +14,14 @@ def array_to_tree(arr):
         return None
     if arr[0] is None:
         if len(arr) > 1:
-            raise Exception
+            raise Exception('root must not be None')
         else:
-            return TreeNode(arr[0])
+            return []
 
     root = TreeNode(arr[0])
     nodes = [root]
     n = len(arr)
-    for i in xrange(n/2+1):
+    for i in range(n//2+1):
         left = i * 2 + 1
         right = i * 2 + 2
 
@@ -57,15 +57,15 @@ def print_in_level_order(root, empty="__"):
     while len(stack):
         node = stack.pop(0)
         if node is not None:
-            print node.val, ' ',
+            print(node.val, ' ',)
             temp.append(node.left)
             temp.append(node.right)
         else:
-            print empty, ' ',
+            print(empty, ' ',)
             temp.append(None)
             temp.append(None)
         if len(stack) == 0:
-            print
+            print()
             if len(list(filter(lambda x: x is not None, temp))) == 0:
                 break   # break when all nodes are None
             stack = temp[:]
