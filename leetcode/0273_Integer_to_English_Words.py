@@ -2,74 +2,39 @@ import unittest
 
 
 class Solution(object):
-    def numberToWords(self, num):
-        """
-        :type num: int
-        :rtype: str
-        """
-        num = str(num)
-        size = len(num)
-        if size <= 3:
-            res = self.three(num)
-        elif size <= 6:
-            res = self.six(num)
-        elif size <= 9:
-            res = self.nine(num)
-        else:
-            res = self.twelve(num)
-        return res
+  LESS_THAN_20 = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
+  'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
+  TENS = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']
+  
+  def numberToWords(self, num):
+    """
+    :type num: int
+    :rtype: str
+    """
+    if num == 0:
+      return 'Zero'
 
-    def twelve(self, num):
-        if int(num[-9:]) == 0:
-            return self.three(num[:-9]) + " Billion"
-        if int(num[:-9]) == 0:
-            return self.nine(num[-9:])
-        return self.three(num[:-9]) + " Billion " + self.nine(num[-9:])
+    thousands = ['', 'Thousand', 'Million', 'Billion']
+    res = ''
+    i = 0
+    while num:
+      temp = num % 1000
+      if temp:
+        res = self.helper(temp) + thousands[i] + ' ' + res
+      i += 1
+      num = num // 1000
 
-    def nine(self, num):
-        if int(num[-6:]) == 0:
-            return self.three(num[:-6]) + " Million"
-        if int(num[:-6]) == 0:
-            return self.six(num[-6:])
-        return self.three(num[:-6]) + " Million " + self.six(num[-6:])
-    
-    def six(self, num):
-        if int(num[-3:]) == 0:
-            return self.three(num[:-3]) + " Thousand"
-        if int(num[:-3]) == 0:
-            return self.three(num[-3:])
-        return self.three(num[:-3]) + " Thousand " + self.three(num[-3:])
-        
-    def three(self, num):
-        # print (num)
-        assert len(num) <= 3
-        num = str(int(num))
-        if int(num) >= 100:
-            if int(num[1:]) == 0:
-                return self.one(num[0]) + " Hundred"
-            return self.one(num[0]) + " Hundred " + self.two(num[1:])
-        elif int(num) >= 10:
-            return self.two(num)
-        else:
-            return self.one(num)
+    return res.strip()
 
-    def two(self, num):
-        ten = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
-        tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']
-        if int(num) >= 10:
-            if num[0] == "1":
-                return ten[int(num[1])]
-            elif num[1] == '0':
-                return tens[int(num[0])]
-            else:
-                return tens[int(num[0])] + " " + self.one(num[1])
-        else:
-            return self.one(num[1])
-        
-    def one(self, num):
-        seed = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine']
-        assert len(num) == 1
-        return seed[int(num)]
+  def helper(self, num):
+    if num == 0:
+      return ''
+    elif num < 20:
+      return self.LESS_THAN_20[num] + ' '
+    elif num < 100:
+      return self.TENS[num//10] + ' ' + self.helper(num % 10)
+    else:
+      return self.LESS_THAN_20[num//100] + ' Hundred ' + self.helper(num % 100)
 
 
 class TestSolution(unittest.TestCase):
@@ -86,6 +51,7 @@ class TestSolution(unittest.TestCase):
     self.assertEqual(self.s.numberToWords(1234567), 'One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven')
     self.assertEqual(self.s.numberToWords(1000010), 'One Million Ten')
     self.assertEqual(self.s.numberToWords(1000000010), 'One Billion Ten')
+    # most important case
     self.assertEqual(self.s.numberToWords(1100000010), 'One Billion One Hundred Million Ten')
 
 
