@@ -36,9 +36,9 @@ class Framework:
     def cp(self):
         if not os.path.isfile(self.name + ".py"):
             os.system('cp ./.tmp/template.py ' + self.name + '.py')
-            print self.name + ".py generated successfully!"
+            print(self.name + ".py generated successfully!")
         else:
-            print self.name + ".py already existed!"
+            print(self.name + ".py already existed!")
 
         # if not os.path.isfile("./c++/" + self.name + ".cpp"):
         #     os.system('cp ./.tmp/framework.cpp ./c++/' + self.name + '.cpp')
@@ -49,13 +49,13 @@ class Framework:
 
 def main():
     if len(sys.argv) < 2:
-        print "Usage: python leetInit.py question_num"
+        print("Usage: python leetInit.py question_num")
         exit()
     # Get the name of this question
     L = LeetCode("./.tmp/list")
     # input question number, return fileName
     fileName = L.title(sys.argv[1])
-    print "Let's deal with " + fileName
+    print("Let's deal with " + fileName)
     # Generate the framework file
     new = Framework(fileName)
     new.cp()
