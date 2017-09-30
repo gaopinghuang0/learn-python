@@ -28,19 +28,14 @@ class Solution(object):
     # idea: pick random one, and check whether others know it, if every one else does,
     # then check whether is knows any one else to see if it is celebrity
     # if not, check only the people who do not know the picked one, repeat the process
-    candidates = set(range(n))
-    while len(candidates) > 0:
-      pivot = candidates.pop()
-      new_candidates = set([c for c in candidates if not knows(c, pivot)])
-      if len(new_candidates) > 0:
-        candidates = new_candidates
-      else:  # check whether pivot is a celebrity
-        unknowns = set([c for c in range(n) if c != pivot and not knows(c, pivot)])
-        if len(unknowns) == 0:  # everyone knows pivot, pivot might be celebrity
-          pivot_knows = [c for c in range(n) if c != pivot and knows(pivot, c)]
-          if len(pivot_knows) == 0:  # pivot knows nobody
-            return pivot
-    return -1
+    candidate = 0
+    for i in range(1, n):
+      if knows(candidate, i):
+        candidate = i
+    for i in range(n):
+      if i != candidate and (not knows(i, candidate) or knows(candidate, i)):
+        return -1
+    return candidate
 
 
 class TestSolution(unittest.TestCase):
