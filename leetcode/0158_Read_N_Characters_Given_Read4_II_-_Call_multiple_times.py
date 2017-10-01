@@ -5,13 +5,16 @@ import unittest
 # @return an integer
 # my own implementation of read4
 data = list(range(11))
-data = ['a']
 c = 0
 def read4(buf):
   global c
-  temp = data[c:c+4]
-  buf += temp
+  if c < len(data):
+    temp = data[c:c+4]
+  else:
+    temp = []
   c += len(temp)
+  for i in range(len(temp)):
+    buf[i] = temp[i]
   return len(temp)
 
 class Solution(object):
@@ -47,20 +50,20 @@ class TestSolution(unittest.TestCase):
 
   def test_method(self):
     """Such as self.assertEqual, self.assertTrue"""
-    global c
-    c = 0
-    buf = []
-    self.assertEqual(self.s.read(buf, 12), 11)
+    buf = [""]
+    self.assertEqual(self.s.read(buf, 0), 0)
     print(buf)
 
-    c = 0
-    buf = []
-    self.assertEqual(self.s.read(buf, 11), 11)
+    buf = [""]*1
+    self.assertEqual(self.s.read(buf, 1), 1)
     print(buf)
 
-    c = 0
-    buf = []
-    self.assertEqual(self.s.read(buf, 7), 7)
+    buf = [""]
+    self.assertEqual(self.s.read(buf, 0), 0)
+    print(buf)
+
+    buf = [""]*5
+    self.assertEqual(self.s.read(buf, 5), 5)
     print(buf)
 
 if __name__ == "__main__":
