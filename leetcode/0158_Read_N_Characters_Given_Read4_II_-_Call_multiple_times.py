@@ -15,20 +15,31 @@ def read4(buf):
   return len(temp)
 
 class Solution(object):
+  def __init__(self):
+    self.queue = []
+
   def read(self, buf, n):
     """
     :type buf: Destination buffer (List[str])
     :type n: Maximum number of characters to read (int)
     :rtype: The number of characters read (int)
     """
+    # note: cannot use len(buf) or len(temp) to get the length
+    # because they should be fixed-length buffers
+    # note2: the read() function could be called for many times, therefore,
+    # the read4() chars need to be stored for future use
+    idx = 0
     while 1:
-      temp = []
+      temp = [""]*4
       m = read4(temp)
-      i = min(n - len(buf), m)
-      buf += temp[:i]
-      if i < 4:  # end of file or read n char already
+      self.queue += temp
+      curr = min(n-idx, len(self.queue))
+      for i in range(curr):
+        buf[idx] = self.queue.pop(0)
+        idx += 1
+      if curr == 0:  # end of file or read n char already
         break
-    return len(buf)
+    return idx
 
 class TestSolution(unittest.TestCase):
   def setUp(self):
