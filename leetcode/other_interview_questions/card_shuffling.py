@@ -22,13 +22,13 @@ def step2(upper, lower):
       res.append(upper[:i] + lower + upper[i:])
     return res
   first_lower = lower[0]
-  for i in range(0, m+1):
-    if i < m:
-      prefix = upper[:i] + [first_lower]
-      for r in step2(upper[i:], lower[1:]):
-        res.append(prefix+r)
-    else:  # i == m
-      res.append(upper+lower)
+  # insert first lower inside upper
+  for i in range(0, m):
+    prefix = upper[:i] + [first_lower]
+    for r in step2(upper[i:], lower[1:]):
+      res.append(prefix+r)
+  # put first lower after upper
+  res.append(upper+lower)
   return res
 
 for r in step2([1,2,3], [4,5,6]):
