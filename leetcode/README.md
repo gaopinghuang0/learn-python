@@ -11,7 +11,7 @@ python dengwei_framework.py question_num
 `TreeHelper.py` and `ListHelper.py`
 
 
-## Template for most `substring` problems
+## Template for most `substring` problems, such as 076
 See: https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems
 ```cpp
 int findSubstring(string s){
