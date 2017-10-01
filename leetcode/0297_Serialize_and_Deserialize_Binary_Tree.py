@@ -32,8 +32,7 @@ class Codec:
     :rtype: TreeNode
     """
     def decode_preorder():
-      x = next(val)
-      print(x)
+      x = next(res)
       if x == '#':
         return None
       node = TreeNode(int(x))
@@ -41,7 +40,7 @@ class Codec:
       node.right = decode_preorder()
       return node
 
-    val = iter(data.split(','))
+    res = iter(data.split(','))
     return decode_preorder()
 
     
