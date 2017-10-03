@@ -27,7 +27,7 @@ class Solution(object):
         next_node = curr_node.next
         heappush(hp, (next_node.val, next_node))
       node = node.next
-    return root.next
+    return root.next  # complexity: O(nlogk)
 
 
       
