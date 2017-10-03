@@ -14,26 +14,19 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        def _diameter(node):
+        def depth(node):
             if not node:
                 return 0
-            d = longest_length(node.left) + longest_length(node.right)
+
+            left = depth(node.left)
+            right = depth(node.right)
+            d = left + right + 1          
             if d > self.res:
                 self.res = d
-            _diameter(node.left)
-            _diameter(node.right)
-        def longest_length(node):
-            if not node:
-                return 0
-            if hasattr(node, 'max_length'):
-                return node.max_length
-            node.max_length = max(longest_length(node.left), longest_length(node.right)) + 1
-            return node.max_length
+            return 1 + max(left, right)
 
-        if not root:
-            return 0
         self.res = 0
-        _diameter(root)
+        depth(root)
         return self.res
 
 
