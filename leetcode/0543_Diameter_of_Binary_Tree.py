@@ -20,7 +20,7 @@ class Solution(object):
 
             left = depth(node.left)
             right = depth(node.right)
-            d = left + right + 1          
+            d = left + right       
             if d > self.res:
                 self.res = d
             return 1 + max(left, right)
