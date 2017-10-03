@@ -25,7 +25,10 @@ class Solution(object):
         def longest_length(node):
             if not node:
                 return 0
-            return max(longest_length(node.left), longest_length(node.right)) + 1
+            if hasattr(node, 'max_length'):
+                return node.max_length
+            node.max_length = max(longest_length(node.left), longest_length(node.right)) + 1
+            return node.max_length
 
         if not root:
             return 0
@@ -37,7 +40,7 @@ class Solution(object):
 
 class TestSolution(unittest.TestCase):
   def setUp(self):
-    pass
+    self.s = Solution()
 
   def test_method(self):
     """Such as self.assertEqual, self.assertTrue"""
