@@ -1,6 +1,7 @@
 import unittest
 
-
+# modifed based on 
+# https://discuss.leetcode.com/topic/30308/my-clear-java-solution-with-explanation
 class Solution(object):
   def isOneEditDistance(self, s, t):
     """
@@ -10,33 +11,16 @@ class Solution(object):
     """
     m = len(s)
     n = len(t)
-    if abs(m-n) > 1:
-      return False
-    if m == n:  # check if one char different
-      count = 0
-      for i, j in zip(s,t):
-        if i != j:
-          count += 1
-      return count == 1
-    if m == 0 or n == 0:
-      return True
-    if m < n:
-      m, n, s, t = n, m, t, s
-    # now t is shorter
-    count, i, j = 0, 0, 0
-    while i < n:
-      if t[i] != s[j]:
-        j += 1
-        count += 1
-      else:
-        i += 1
-        j += 1
-      if j >= m and count != 1:
-        return False
-    if j < m and count == 0:
-      return True
-    return count == 1
-
+    for i in range(min(m,n)):
+      if s[i] != t[i]:
+        # three possibilities
+        if m == n:  # compare rest
+          return s[i+1:] == t[i+1:]
+        elif m < n:  # delete one char from t
+          return s[i:] == t[i+1:]
+        else:  # delete one char from s
+          return s[i+1:] == t[i:]
+    return abs(m - n) == 1  # all previous chars are the same, check extra chars
 
 class TestSolution(unittest.TestCase):
   def setUp(self):
