@@ -39,23 +39,21 @@ class NestedIterator(object):
         """
         :rtype: int
         """
-        node = self.q.pop(0)
-        if node.isInteger():
-          return node.getInteger()
-        else:
-          self.q = node.getList() + self.q
-          return self.next()
+        return self.q.pop(0).getInteger()
 
     def hasNext(self):
         """
         :rtype: bool
         """
-        def hasInt(nestInt):
-          if any(node.isInteger() for node in nestInt):
-            return True
-          return any(hasInt(node.getList()) for node in nestInt if not node.isInteger())
+        if not self.q:
+          return False
 
-        return hasInt(self.q)
+        node = self.q[0]
+        if node.isInteger():
+          return True
+        node = self.q.pop(0)
+        self.q = node.getList() + self.q
+        return self.hasNext()
         
 
 # Your NestedIterator object will be instantiated and called as such:
