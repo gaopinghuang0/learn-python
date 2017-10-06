@@ -49,19 +49,54 @@ def array_to_tree(arr):
 
     return root
 
+def array_to_BST(arr):
+    """Binary search tree."""
+    if not arr:
+        return None
+    root = TreeNode(arr[0])
+    for x in arr[1:]:
+        node = root
+        while True:
+            if x < node.val:
+                if node.left:
+                    node = node.left
+                else:
+                    node.left = TreeNode(x)
+                    break
+            elif x > node.val:
+                if node.right:
+                    node = node.right
+                else:
+                    node.right = TreeNode(x)
+                    break
+            else:
+                break
+
+    return root
+
+def search_in_BST(root, val):
+    p = root
+    while p:
+      if val < p.val:
+        p = p.left
+      elif val > p.val:
+        p = p.right
+      else:
+        break
+    return p
 
 # Naive way
-def print_in_level_order(root, empty="__"):
+def print_in_level_order(root, empty="None"):
     stack = [root]
     temp = []
     while len(stack):
         node = stack.pop(0)
         if node is not None:
-            print(node.val, ' ',)
+            print(node.val, ' ', end='')
             temp.append(node.left)
             temp.append(node.right)
         else:
-            print(empty, ' ',)
+            print(empty, ' ', end='')
             temp.append(None)
             temp.append(None)
         if len(stack) == 0:
