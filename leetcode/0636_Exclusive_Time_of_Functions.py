@@ -8,37 +8,23 @@ class Solution(object):
         :type logs: List[str]
         :rtype: List[int]
         """
-        c = [0] * n
+        ans = [0] * n
         stack = []
         last_time = 0
         for log in logs:
             _id, task, time = log.split(":")
             _id, time = int(_id), int(time)
-            if not stack:
-                if task == 'start':
-                    stack.append(_id)
-                    last_time = time
-                else:
-                    raise ValueError
+
+            if task == 'start':
+                if stack:
+                    ans[stack[-1]] += time - last_time
+                stack.append(_id)
+                last_time = time
             else:
-                last_id = stack[-1]
-                if _id == last_id:
-                    if task == 'end':
-                        c[_id] += time - last_time + 1
-                        stack.pop(-1)
-                        last_time = time + 1
-                    else:
-                        c[_id] += time - last_time
-                        stack.append(_id)
-                        last_time = time
-                elif _id != last_id:
-                    if task == 'start':
-                        c[last_id] += time - last_time
-                        stack.append(_id)
-                        last_time = time
-                    else:
-                        raise ValueError
-        return c
+                ans[stack.pop()] += time - last_time + 1
+                last_time = time + 1
+
+        return ans
 
 
 
