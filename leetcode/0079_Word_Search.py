@@ -25,7 +25,7 @@ class Solution(object):
     for i in board:
       for j in i:
         if j in counter:
-          counter -= 1
+          counter[j] -= 1
     if counter.most_common(1)[1] > 0:
       return False
     return True
