@@ -8,32 +8,29 @@ class Solution(object):
     :type target: int
     :rtype: int
     """
-    # idea: binary search to find the smallest value
+    # idea: binary search
     n = len(nums)
-    low = 0
-    high = n - 1
+    if not n:
+      return -1
+
+    low, high = 0, n-1
     while low < high:
       mid = (low + high) / 2
-      if nums[mid] >= nums[low] and nums[mid] >= nums[high]:
-        low = mid + 1
-      else:
-        high = mid
-    rot = low
-    print rot
+      cur = nums[mid]
+      if cur == target:
+        return mid
 
-    # pretend we rotate it back by idx % len(nums)
-    low = rot
-    high = n - 1 + rot
-    while low <= high:
-      mid = (low + high) / 2
-      if nums[mid % n] > target:
-        high = mid - 1
-      elif nums[mid % n] < target:
-        low = mid + 1
-      else:
-        return mid % n
-    return -1
-
+      if cur >= nums[low]:  # left side is sorted
+        if target >= nums[low] and cur >= target:
+          high = mid - 1
+        else:
+          low = mid + 1
+      else:  # right side is sorted
+        if target >= cur and target <= nums[high]:
+          low = mid + 1
+        else:
+          high = mid - 1
+    return high if nums[high] == target else -1
 
 
 class TestSolution(unittest.TestCase):
