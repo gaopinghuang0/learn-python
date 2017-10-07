@@ -14,39 +14,18 @@ class Solution(object):
     :type newInterval: Interval
     :rtype: List[Interval]
     """
-    ans = []
-    if not intervals:
-      return [newInterval]
-    if not newInterval:
-      return intervals
-
-    # handle two sides
     start = newInterval.start
     end = newInterval.end
-    if end < intervals[0].start:
-      return [newInterval]+intervals
-    elif start > intervals[-1].end:
-      return intervals + [newInterval]
 
-    for i, intv in enumerate(intervals):
-      if newInterval.start <= intv.end:
-        start = min(intv.start, start)
-        
-        is_jump = False
-        for j, _intv in enumerate(intervals[i:], i):
-          if newInterval.end >= _intv.start:
-            end = max(newInterval.end, _intv.end)
-          else:
-            is_jump = True
-            break
-        ans.append(Interval(start, end))
-        if is_jump:
-            ans += intervals[j:]
-        break
-      else:
-        ans.append(intv)
+    left = [i for i in intervals if i.end < start]
+    right = [i for i in intervals if i.start > end]
 
-    return ans
+    # check if we should merge
+    if len(left) + len(right) < len(intervals):
+      start = min(start, intervals[len(left)].start)
+      end = max(end, intervals[-len(right)-1].end)
+
+    return left + [Interval(start, end)] + right
 
 
 
