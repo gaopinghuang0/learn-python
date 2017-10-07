@@ -10,11 +10,25 @@ class Solution(object):
     """
     if not board:
       return False
+    if not self.preCheck(board, word):
+      return False
     for i in range(len(board)):
       for j in range(len(board[0])):
         if self.dfs(board, i, j, word):
           return True
     return False
+
+  def preCheck(self, board, word):
+    from collections import Counter
+    counter = Counter(word)
+
+    for i in board:
+      for j in i:
+        if j in counter:
+          counter -= 1
+    if counter.most_common(1)[1] > 0:
+      return False
+    return True
 
   def dfs(self, board, i, j, word):
     if not word:
