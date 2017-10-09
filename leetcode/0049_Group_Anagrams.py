@@ -7,27 +7,13 @@ class Solution(object):
     :type strs: List[str]
     :rtype: List[List[str]]
     """
-    from collections import defaultdict, Counter
+    from collections import defaultdict
     d = defaultdict(list)
     for x in strs:
-      d[frozenset(x)].append(x)
-    # if x is in diff set, they must not be anagrams
-    # but if they are in the same set, they may not be anagrams
-    ans = []
-    for group in d.values():
-      keys = []
-      temp = defaultdict(list)
-      for x in group:
-        c = Counter(x)
-        if c in keys:
-          idx = keys.index(c)
-          temp[idx].append(x)
-        else:
-          keys.append(c)
-          temp[len(keys)-1].append(x)
-      ans += temp.values()
+      key = ''.join(sorted(x))
+      d[key].append(x)
 
-    return ans
+    return d.values()
 
 
 class TestSolution(unittest.TestCase):
