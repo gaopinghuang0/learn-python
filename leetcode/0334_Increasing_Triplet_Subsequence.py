@@ -1,6 +1,28 @@
 import unittest
 
+# optimize
+class Solution(object):
+  def increasingTriplet(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: bool
+    """
+    if len(nums) < 3:
+      return False
+    first = max(nums) + 1
+    second = first
 
+    for num in nums:
+      if num <= first:  # guarantee that first is set to a number smaller than second if any
+        first = num
+      elif num <= second:
+        second = num
+      else:
+        return True
+    return False
+
+
+# correct
 class Solution(object):
   def increasingTriplet(self, nums):
     """
