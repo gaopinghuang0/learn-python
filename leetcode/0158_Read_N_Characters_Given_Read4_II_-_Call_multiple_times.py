@@ -17,6 +17,29 @@ def read4(buf):
     buf[i] = temp[i]
   return len(temp)
 
+# update: my new own version, shortest and fastest
+class Solution(object):
+    def __init__(self):
+        self.queue = collections.deque()
+
+    def read(self, buf, n):
+        """
+        :type buf: Destination buffer (List[str])
+        :type n: Maximum number of characters to read (int)
+        :rtype: The number of characters read (int)
+        """
+        # idea: store the data from read4() for future use
+        # note: update buf in-place
+        while len(self.queue) < n:
+            tmp = [""]*4
+            read4(tmp)
+            self.queue.extend(tmp)
+            
+        for i in range(n):
+            buf[i] = self.queue.popleft()
+        return n
+
+
 class Solution(object):
   def __init__(self):
     self.queue = []
@@ -43,6 +66,9 @@ class Solution(object):
       if curr == 0:  # end of file or read n char already
         break
     return idx
+
+
+
 
 class TestSolution(unittest.TestCase):
   def setUp(self):
