@@ -1,6 +1,34 @@
 import unittest
 
+from collections import defaultdict
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        if not board or not board[0]:
+            return False
+        m, n = len(board), len(board[0])
 
+        row_vals = defaultdict(set)
+        col_vals = defaultdict(set)
+        sub_vals = defaultdict(set)
+
+        for row in range(m):
+            for col in range(n):
+                c = board[row][col]
+                if c == '.':
+                    continue
+                sub = str(row / 3) + str(col / 3)
+                if c in row_vals[row] or c in col_vals[col] or c in sub_vals[sub]:
+                    return False
+
+                row_vals[row].add(c)
+                col_vals[col].add(c)
+                sub_vals[sub].add(c)
+        return True
+# slow
 class Solution(object):
     def isValidSudoku(self, board):
         """
