@@ -7,6 +7,36 @@ import unittest
 #         self.left = None
 #         self.right = None
 
+# update: use a stack
+class BSTIterator(object):
+    def __init__(self, root):
+        """
+        :type root: TreeNode
+        """
+        # idea: use a stack to store preorder nodes
+        self.stack = []
+        node = root
+        while node:
+            self.stack.append(node)
+            node = node.left
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return len(self.stack) > 0
+        
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        node = self.stack.pop()
+        n = node.right
+        while n:
+            self.stack.append(n)
+            n = n.left
+        return node.val
 
 # idea: use a queue to store the nodes
 # whenever a node is popped out, it means its left child and itself have been popped out

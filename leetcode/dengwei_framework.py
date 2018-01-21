@@ -49,7 +49,7 @@ class Framework:
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python leetInit.py question_num")
+        print("Usage: python dengwei_framework.py <question_num>")
         exit()
     # Get the name of this question
     L = LeetCode("./.tmp/list")
