@@ -24,10 +24,14 @@ class Solution(object):
     :type n: int
     :rtype: int
     """
+    # idea 1: too slow
     # DAG, graph, if there is a celebrity, then all (n-1) edges should be inwards
     # idea: pick random one, and check whether others know it, if every one else does,
     # then check whether is knows any one else to see if it is celebrity
     # if not, check only the people who do not know the picked one, repeat the process
+    
+    # idea 2: fast, O(n)
+    # switch candidate immediately after knows() is True
     candidate = 0
     for i in range(1, n):
       if knows(candidate, i):

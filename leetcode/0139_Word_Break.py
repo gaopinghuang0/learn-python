@@ -1,5 +1,24 @@
 import unittest
 
+# update: my new faster version, beats 99.95%
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        # idea: 1D dp, ok[i] means s[:i] can be built
+        if not wordDict:
+            return False
+        words = set(wordDict)
+        word_lens = {len(x)-1 for x in words}
+        ok = [True]
+        for i in range(len(s)):
+            ok.append(any((i-j>=0 and ok[-1-j] and s[i-j:i+1] in words) for j in word_lens))
+        return ok[-1]
+
+
 
 class Solution(object):
   def wordBreak(self, s, wordDict):
