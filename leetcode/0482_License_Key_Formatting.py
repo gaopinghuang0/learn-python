@@ -1,4 +1,23 @@
 
+# beats 60.46%
+class Solution(object):
+    def licenseKeyFormatting(self, S, K):
+        """
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        s = S.replace('-', '').upper()
+        size = len(s)
+        if size < K:
+            return s
+        i = K if size % K == 0 else size % K
+        ans = [s[:i]]
+        while i < size:
+            ans.append(s[i:i+K])
+            i += K
+        return '-'.join(ans)
+
 
 # slow, beats 0.51%
 class Solution(object):
