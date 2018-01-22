@@ -9,8 +9,6 @@ class Solution(object):
         """
         s = S.replace('-', '').upper()
         size = len(s)
-        if size < K:
-            return s
         i = K if size % K == 0 else size % K
         ans = [s[:i]]
         while i < size:
