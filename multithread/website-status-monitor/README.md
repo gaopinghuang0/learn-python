@@ -4,6 +4,9 @@ The purpose of these apps is to notify you when your website is down so that you
 ### Based on the tutorial:
 [Introduction to Parallel and Concurrent Programming in Python](https://code.tutsplus.com/articles/introduction-to-parallel-and-concurrent-programming-in-python--cms-28612)
 
+### Different approaches
+There are several approaches for the same purpose: `serial`, `threading`, `concurrent.futures`, `multiprocessing`, `gevent`, and `celery`. Since the `celery` is very different from the other ones, I did not include its example.
+
 ### Conclusion from the tutorial
 * There are several paradigms that help us achieve high-performance computing in Python.
 * For the multi-threaded paradigm, we have the `threading` and `concurrent.futures` libraries.
