@@ -1,9 +1,10 @@
 """
-Learn python interpreter from https://github.com/aosabook/500lines/blob/master/interpreter/interpreter.markdown
+Learn python interpreter from 
+https://github.com/aosabook/500lines/blob/master/interpreter/interpreter.markdown
 """
 
 
-class Interpreter:
+class Interpreter(object):
 	def __init__(self):
 		self.stack = []
 
