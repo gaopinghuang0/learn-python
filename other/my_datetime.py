@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import division, unicode_literals # boilerplate
 from datetime import timedelta

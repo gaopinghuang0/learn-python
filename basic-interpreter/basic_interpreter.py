@@ -1,5 +1,5 @@
 """
-Learn python interpreter from 
+Learn 500 lines python interpreter from 
 https://github.com/aosabook/500lines/blob/master/interpreter/interpreter.markdown
 """
 
