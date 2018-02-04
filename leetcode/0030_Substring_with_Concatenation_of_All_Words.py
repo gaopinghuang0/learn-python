@@ -1,6 +1,42 @@
 import unittest
 
+# idea is the same as below, but code is shorter
+# borrow from the submission
+# beats 94.30%
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        if not s or not words:
+            return []
 
+        s_len = len(s)
+        w_size = len(words[0])
+        total_size = len(words) * w_size
+        counter = {}
+        for word in words:
+            counter[word] = counter.get(word, 0) + 1
+        res = []
+        for start in range(w_size):
+            curr = {}
+            end = start
+            while start + total_size <= s_len:
+                sub = s[end:end+w_size]
+                end += w_size
+                if sub not in counter:
+                    curr = {}
+                    start = end
+                else:
+                    curr[sub] = curr.get(sub, 0) + 1
+                    while curr[sub] > counter[sub]:
+                        curr[s[start:start+w_size]] -= 1
+                        start += w_size
+                    if start + total_size == end:
+                        res.append(start)
+        return res
 
 # beats 49.00%
 from collections import Counter
