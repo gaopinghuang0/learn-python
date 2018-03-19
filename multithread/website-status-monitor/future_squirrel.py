@@ -15,8 +15,8 @@ NUM_WORKERS = 4
 start_time = time.time()
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
-    futures = {executor.submit(check_website, address) for address in WEBSITE_LIST}
-    concurrent.futures.wait(futures)
+    tasks = {executor.submit(check_website, address) for address in WEBSITE_LIST}
+    concurrent.futures.wait(tasks)
 
 end_time = time.time()
 
