@@ -1,4 +1,34 @@
 
+# optimize with Other's submission, beats 96.51%
+from bisect import bisect_left
+class MyCalendarThree(object):
+
+    def __init__(self):
+        self.timeline = [-1, 10**9+1]
+        self.bookings = [0,0]
+        self.maxbooking = 0
+
+    def book(self, start, end):
+        """
+        :type start: int
+        :type end: int
+        :rtype: bool
+        """
+        i = bisect_left(self.timeline, start)
+        if self.timeline[i] != start:
+            self.timeline.insert(i, start)
+            self.bookings.insert(i, self.bookings[i-1])
+
+        j = bisect_left(self.timeline, end)
+        if self.timeline[j] != end:
+            self.timeline.insert(j, end)
+            self.bookings.insert(j, self.bookings[j-1])
+
+        for idx in range(i, j):
+            self.bookings[idx] += 1
+            self.maxbooking = max(self.maxbooking, self.bookings[idx])
+
+        return self.maxbooking
 
 # beats 52.33%
 # python KeyOrderedDict
