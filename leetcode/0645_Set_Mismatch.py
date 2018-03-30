@@ -1,4 +1,5 @@
 
+# O(n) time and O(1) space 
 # idea from Discuss, beats 56.03%
 class Solution(object):
     def findErrorNums(self, nums):
@@ -6,7 +7,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        # idea: O(1) space 
+        # idea: O(n) time and O(1) space 
         # for current element value, set nums[value-1] as negative to indicate
         # that it occurs once
         # also, to find the missing one, use the sum of 1 to n and the real sum
