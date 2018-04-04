@@ -1,6 +1,29 @@
 import unittest
 
 
+# idea from Submission
+# it's even slower, only beats 11.90%
+class Solution(object):
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        # idea: use a dict to store visited node
+        if not head:
+            return None
+
+        node = head
+        visited = {}
+        while node:
+            if node not in visited:
+                visited[node] = node
+            else:
+                return visited[node]
+            node = node.next
+
+        return None
+
 
 # Definition for singly-linked list.
 # class ListNode(object):
