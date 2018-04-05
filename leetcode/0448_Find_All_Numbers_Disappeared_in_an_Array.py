@@ -1,5 +1,6 @@
 
-# beats 7.79%
+# beats 7.79%, O(n) time and O(1) space
+# although other methods are faster, they use O(n) space
 class Solution(object):
     def findDisappearedNumbers(self, nums):
         """
