@@ -1,6 +1,6 @@
 import unittest
 
-
+# beats 93.91%
 class Solution(object):
     def maxSubArray(self, nums):
         """
@@ -11,13 +11,17 @@ class Solution(object):
         # we either take sum(nums[0:n-1])+nums[n] or nums[n], whichever is larger. 
         # In other words, if sum(nums[0:n-1)] is less than 0, 
         # than we will drop the nums[0:n-1].
-        ret = -9999
+        res = float('-inf')
         prevsum = nums[0]
 
         for i in range(1, len(nums)):
-            prevsum = max(nums[i], nums[i]+prevsum)
-            ret = max(ret, prevsum)
-        return max(nums[0], ret)
+            if prevsum < 0:
+                prevsum = nums[i]
+            else:
+                prevsum += nums[i]
+            if res < prevsum:
+                res = prevsum
+        return max(nums[0], res)
 
 
 class TestSolution(unittest.TestCase):
