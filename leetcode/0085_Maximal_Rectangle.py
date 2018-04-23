@@ -27,8 +27,8 @@ class Solution(object):
                 stack.append(i)
         return res
 
-
-class Solution_V1(object):
+# Solution not working
+class Solution_Not_Working_Yet(object):
     def maximalRectangle(self, matrix):
         """
         :type matrix: List[List[str]]
