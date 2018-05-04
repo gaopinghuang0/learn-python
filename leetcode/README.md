@@ -8,11 +8,16 @@ $ python dengwei_framework.py question_num
 # note: if question_num has only one digit, add a leading 0 such as 02, 0x, ...
 ```
 
-## two util scripts under utils/
+## Two util scripts under utils/
 `TreeHelper.py` and `ListHelper.py`
 
 
-## Template for most `substring` problems, such as 076
+## Useful tricks
+
+### Common methods to try
+See [summary.md](./summary.md)
+
+### Template for most `substring` problems, such as 076
 See: https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems
 ```cpp
 int findSubstring(string s){
