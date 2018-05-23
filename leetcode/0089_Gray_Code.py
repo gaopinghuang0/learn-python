@@ -1,7 +1,22 @@
 import unittest
 
-
+# beats 22.01%
+# I don't know why it's slower than recursion
 class Solution(object):
+    def grayCode(self, n):
+        """
+        :type n: int
+        :rtype: List[int]
+        """
+        # idea: iterative
+        res = [0]
+        for i in range(n):
+            head = 1 << i
+            res += [head+x for x in res[::-1]]
+        return res
+
+# beats 75.47%
+class Solution_V1(object):
     def grayCode(self, n):
         """
         :type n: int
@@ -10,11 +25,10 @@ class Solution(object):
         # idea: recursion from right to left
         if n == 0:
             return [0]
-        if n == 1:
-            return [0, 1]
         res = self.grayCode(n-1)
         # add 2**(n-1) to the reverse of half
-        return res + [2**(n-1)+x for x in res[::-1]]
+        head = 1 << (n-1)
+        return res + [head+x for x in res[::-1]]
 
 
 class TestSolution(unittest.TestCase):
