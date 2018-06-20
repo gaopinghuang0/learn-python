@@ -1,8 +1,38 @@
 import unittest
 
+
+# optimize, idea from Submission, beats 62.72%
+class Solution(object):
+    def kthSmallest(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        # idea from Submission: binary search
+        n = len(matrix)
+        lo, hi = matrix[0][0], matrix[-1][-1]
+        while lo < hi:
+            mid = (lo + hi) // 2
+            count = 0  # count the number that is smaller than mid
+            j = n-1
+            # a smart algorithm to count the number
+            for i in range(n):
+                while j >= 0 and matrix[i][j] > mid:
+                    j -= 1
+                # for i-th row, the number between the j-th column and the last column
+                # would be greater than mid. Also, j must be non-increasing from i=1 to i=n-1
+                # since the next row would be greater than the prev row, namely, mid <= matrix[i][j] <= matrix[i+1][j]
+                count += j+1
+            if count < k:  # increase mid
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
+
 # beats 26.96%
 from heapq import heappush, heappop
-class Solution(object):
+class Solution_v1(object):
     def kthSmallest(self, matrix, k):
         """
         :type matrix: List[List[int]]
