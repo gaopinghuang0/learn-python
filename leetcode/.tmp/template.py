@@ -11,8 +11,7 @@ class TestSolution(unittest.TestCase):
 
     def test_method(self):
         """Such as self.assertEqual, self.assertTrue"""
-        # self.assertEqual(self.s.method(), None)
-        pass
+        self.assertEqual(self.s.method(), None)
 
 
 if __name__ == "__main__":
