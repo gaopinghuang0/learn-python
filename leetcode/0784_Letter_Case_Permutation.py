@@ -1,7 +1,19 @@
 import unittest
 
-# beats 33.86%
+import itertools
+# optimize, idea from Submission, beats 58.90%
 class Solution(object):
+    def letterCasePermutation(self, S):
+        """
+        :type S: str
+        :rtype: List[str]
+        """
+        L = [i.lower()+i.upper() if i.isalpha() else i for i in S]
+        return ["".join(i) for i in itertools.product(*L)]
+
+
+# beats 33.86%
+class Solution_V1(object):
     def letterCasePermutation(self, S):
         """
         :type S: str
