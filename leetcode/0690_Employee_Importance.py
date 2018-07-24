@@ -14,8 +14,28 @@ class Employee(object):
         self.subordinates = subordinates
 """
 
-# beats 18.59%
+# optimize, idea from Submission, beats 52.53%
 class Solution(object):
+    def getImportance(self, employees, id):
+        """
+        :type employees: Employee
+        :type id: int
+        :rtype: int
+        """
+        # idea: first build a map of id to index, then use a stack like a dfs
+        lookup = {emp.id:emp for emp in employees}  # {id: employee}
+
+        # build a dependency of nodes in the stack
+        stack = [id]
+        imp = 0
+        while stack:
+            emp = lookup[stack.pop()]
+            imp += emp.importance
+            stack += emp.subordinates
+        return imp
+
+# beats 18.59%
+class Solution_V1(object):
     def getImportance(self, employees, id):
         """
         :type employees: Employee
