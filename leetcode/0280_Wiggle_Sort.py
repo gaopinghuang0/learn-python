@@ -1,5 +1,20 @@
 import unittest
 
+
+# optimize, idea from Submission, beats 100%
+class Solution(object):
+    def wiggleSort(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        for i in range(1, n, 2):
+            if nums[i-1] > nums[i]:
+                nums[i-1], nums[i] = nums[i], nums[i-1]
+            if i+1 < n and nums[i] < nums[i+1]:
+                nums[i], nums[i+1] = nums[i+1], nums[i]
+
 # beats 6.92%
 class Solution(object):
     def wiggleSort(self, nums):
