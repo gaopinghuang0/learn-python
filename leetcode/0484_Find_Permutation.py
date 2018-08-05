@@ -1,7 +1,29 @@
 import unittest
 
-# beats 3.45%
+# optimize, beats 89.66%
 class Solution(object):
+    def findPermutation(self, s):
+        """
+        :type s: str
+        :rtype: List[int]
+        """
+        # idea: find the last 'D', reverse
+        n = len(s)
+        res = list(range(1, n+2))
+        i = 0
+        while i < n:
+            cnt = 0
+            while i < n and s[i] == 'D':
+                i += 1
+                cnt += 1
+            res[i-cnt:i+1] = res[i-cnt:i+1][::-1]
+            while i < n and s[i] == 'I':
+                i += 1
+        return res
+
+
+# beats 3.45%
+class Solution_V1(object):
     def findPermutation(self, s):
         """
         :type s: str
