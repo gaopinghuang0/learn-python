@@ -1,7 +1,25 @@
 import unittest
 
-# beats 25.37%
+# optimize, idea from Submission, beats 98.53%
 class Solution(object):
+    def countBattleships(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: int
+        """
+        # idea: one-pass, each battleship must have a top-left corner
+        # that is X while its left and up is not X
+        count = 0
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == 'X':
+                    if i == 0 or board[i-1][j] != 'X':  # its left is not X
+                        if j == 0 or board[i][j-1] != 'X':  # its up is not X
+                            count += 1
+        return count
+
+# beats 25.37%
+class Solution_V1(object):
     def countBattleships(self, board):
         """
         :type board: List[List[str]]
