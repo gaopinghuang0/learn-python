@@ -1,7 +1,32 @@
 import unittest
 
-# beats 1.53%
+# optimize, beats 90.82%
 class Solution(object):
+    def killProcess(self, pid, ppid, kill):
+        """
+        :type pid: List[int]
+        :type ppid: List[int]
+        :type kill: int
+        :rtype: List[int]
+        """
+        # idea: use a dict
+        parent_to_childen = {}  # {ppid: set(pid,)}
+        for x, y in zip(pid, ppid):
+            if y in parent_to_childen:
+                parent_to_childen[y].append(x)
+            else:
+                parent_to_childen[y] = [x]
+        stack = [kill]
+        res = []
+        while stack:
+            ppid = stack.pop()
+            res.append(ppid)
+            if ppid in parent_to_childen:  # is a ppid
+                stack += parent_to_childen[ppid]
+        return res
+
+# beats 1.53%
+class Solution_V1(object):
     def killProcess(self, pid, ppid, kill):
         """
         :type pid: List[int]
@@ -36,7 +61,7 @@ class TestSolution(unittest.TestCase):
         pid =  [1, 3, 10, 5]
         ppid = [3, 0, 5, 3]
         kill = 5
-        self.assertEqual(set(self.s.killProcess(pid, ppid, kill)), set([5,10]))
+        self.assertEqual(self.s.killProcess(pid, ppid, kill), [5,10])
 
 
 if __name__ == "__main__":
