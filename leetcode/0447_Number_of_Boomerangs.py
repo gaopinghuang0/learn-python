@@ -1,5 +1,24 @@
 import unittest
 
+# optimize, idea from Submission, beats 99.67%
+class Solution(object):
+    def numberOfBoomerangs(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        res = 0
+        for x1, y1 in points:
+            m = {}
+            for x2, y2 in points:
+                dist = (x1-x2)**2 + (y1-y2)**2
+                if dist in m:
+                    res += m[dist]
+                    m[dist] += 2
+                else:
+                    m[dist] = 2
+        return res
+
 # beats 8.91%
 class Solution(object):
     def numberOfBoomerangs(self, points):
