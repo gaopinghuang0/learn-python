@@ -1,8 +1,26 @@
 import unittest
-
 import collections, re
-# beats 8.65%
+
+# beats 99.08%
 class Solution(object):
+    def mostCommonWord(self, paragraph, banned):
+        """
+        :type paragraph: str
+        :type banned: List[str]
+        :rtype: str
+        """
+        # optimize by Submission
+        ban_set = set(banned)
+        paragraph = re.sub(r'[^a-z ]', '', paragraph.lower())
+        counter = collections.Counter()
+        for word in paragraph.strip().split(' '):
+            if word not in ban_set:
+                counter[word] += 1
+        return counter.most_common(1)[0][0]
+
+
+# beats 8.65%
+class Solution_V1(object):
     def mostCommonWord(self, paragraph, banned):
         """
         :type paragraph: str
