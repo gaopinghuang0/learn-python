@@ -1,5 +1,29 @@
 import unittest
 
+# idea from Submission
+class Solution(object):
+    def minWindow(self, s, t):
+        need = collections.defaultdict(int)
+        for ch in t: 
+            need[ch] += 1
+        missing = len(t)                         
+        start, end = 0, 0
+        i = 0
+        for j, char in enumerate(s, 1): 
+            if need[char] > 0:
+                missing -= 1
+            need[char] -= 1
+            if missing == 0:      
+                while i < j and need[s[i]] < 0:  
+                    need[s[i]] += 1
+                    i += 1
+                need[s[i]] += 1                   
+                missing += 1                     
+                if end == 0 or j-i < end-start:  
+                    start, end = i, j
+                i += 1                           
+        return s[start:end]
+
 # Modifed from template:
 # https://discuss.leetcode.com/topic/30941/here-is-a-10-line-template-that-can-solve-most-substring-problems
 from collections import defaultdict
