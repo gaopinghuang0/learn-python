@@ -17,3 +17,6 @@
 * min- or max-heap
 * bit operation
   * 0397_Integer_Replacement
+* disjoint set (or union find)
+  * 0684_Redundant_Connection
+  * 0803_Bricks_Falling_When_Hit
