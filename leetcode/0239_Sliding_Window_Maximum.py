@@ -1,7 +1,47 @@
 import unittest
 
+from collections import deque
+from typing import List
+
+class MonotonicQueue:
+    def __init__(self):
+        self.queue = deque()
+
+    def push(self, n: int):
+        """Remove the values in the queue that are smaller than n.
+        
+        For example: initial queue [5,3,2,1], n=4
+        result queue:  [5,4]
+        """
+        while self.queue and self.queue[-1] < n:
+            self.queue.pop()
+        self.queue.append(n)
+
+    def max(self) -> int:
+        return self.queue[0]
+
+    def pop(self, n: int):
+        "Only pop if the queue front matches n"
+        if self.queue and self.queue[0] == n:
+            self.queue.popleft()
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        # Use a monotonic queue
+        window = MonotonicQueue()
+        res = []
+        for i, num in enumerate(nums):
+            if i < k - 1:
+                window.push(num)
+            else:
+                window.push(num)
+                res.append(window.max())
+                window.pop(nums[i-k+1])
+        return res
+
+
 # beats 39.12%
-class Solution(object):
+class Solution_1(object):
     def maxSlidingWindow(self, nums, k):
         """
         :type nums: List[int]
