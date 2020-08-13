@@ -27,7 +27,16 @@ class Solution(object):
                 stack.append(i)
         return res
 
-# Solution not working
+# DP Solution not working
+# A counter case:
+# 0 0 1 1 0
+# 0 1 1 1 0
+# 0 1 1 1 0
+# 0 1 1 1 0
+# 0 0 1 1 0
+# Note that dp[4][4] has a max rectangle with size 9 (3 * 3).
+# Using dp solution below, dp[5][4] will only get size 8, where the rectangle is (1,2) to (4,3).
+# However, the max rect should be (0,2) to (4,3) with size 10.
 class Solution_Not_Working_Yet(object):
     def maximalRectangle(self, matrix):
         """

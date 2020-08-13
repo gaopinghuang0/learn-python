@@ -11,9 +11,10 @@ class Solution(object):
         # note: the basic idea is very similar to the Solution_V1 below
         # i.e., try to find the 'left index' and 'right index' efficiently
         # so that the width is (r-l-1), the difference is that we are using a stack
+        # to store all the indices.
 
-        # for any bar i, if the bar is higher than the bar at the stack top, push i to stack
-        # if it's lower, then keep poping stack until reach smaller bar. For each removed bar
+        # For any bar i, if the bar is higher than the bar at the stack top, push i to stack.
+        # If it's lower, then keep poping stack until reach smaller bar. For each removed bar
         # from the stack, say heights[tp], calculate the area of rect with heights[tp] as the
         # smallest bar, the 'left index' is previous item in stack and 'right index'
         # is 'i' (currect index)
@@ -25,15 +26,15 @@ class Solution(object):
                 stack.append(i)
             else:
                 while stack and h < heights[stack[-1]]:
-                    tp = stack.pop()
+                    top = stack.pop()
                     left = stack[-1] if stack else -1
-                    res = max(res, heights[tp] * (i - left - 1))
+                    res = max(res, heights[top] * (i - left - 1))
                 stack.append(i)
         # some elements remaining, now repeat the same process as above
         while stack:
-            tp = stack.pop()
+            top = stack.pop()
             left = stack[-1] if stack else -1
-            res = max(res, heights[tp] * (n - left - 1))
+            res = max(res, heights[top] * (n - left - 1))
         return res
 
 

@@ -1,6 +1,9 @@
 # 特殊数据结构：单调队列
 # https://github.com/labuladong/fucking-algorithm/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%B3%BB%E5%88%97/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97.md
-# For leetcode 239
+# For leetcode 239 Sliding Window Maximum
+
+# Similarly, monotonic stack.
+# leetcode 84 Largest rectangle in Histogram.
 
 # 就是一个「队列」，只是使用了一点巧妙的方法，使得队列中的元素单调递增（或递减）
 # 这个数据结构有什么用？可以解决滑动窗口的一系列问题。
